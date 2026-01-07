@@ -1,0 +1,1391 @@
+Login.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('blue1.jpg');
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.148), -1px -1px 2px rgba(255, 255, 255, 0.3);
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2 img {
+            width: 60px;
+            margin-right: 28px;
+            margin-left: -60px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px 40px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            outline: none;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.126), -1px -1px 2px rgba(255, 255, 255, 0.084);
+        }
+
+        .input-box .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.126), -1px -1px 2px rgba(255, 255, 255, 0.084);
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password {
+            color: #614978;
+            font-size: 12px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.126), -1px -1px 2px rgba(255, 255, 255, 0.084);
+            text-decoration: none;
+        }
+
+        .forgot-password a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.201), -1px -1px 2px rgba(255, 255, 255, 0.084);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .signup-link {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none; /* Hidden by default */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>
+                <img src="toyoto_logo 2.png" alt="Toyota Logo"> Guest Coupon
+            </h2>
+            <form action="login.php" method="POST" onsubmit="return validateForm(event)">
+                <div class="input-box">
+                    <label for="employee_id">Employee ID:</label>
+                    <i class="fas fa-user icon"></i>
+                    <input type="text" id="employee_id" name="employee_id" placeholder="Enter your Employee ID" maxlength="10" required>
+                    <div class="error-message" id="employee_id_error"></div>
+                </div>
+                <div class="input-box">
+                    <label for="password">Password:</label>
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <div class="error-message" id="password_error"></div>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+          
+            <div class="signup-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form submission until validation is done
+
+            const employee_id = document.getElementById('employee_id');
+            const password = document.getElementById('password');
+            const employeeIdPattern = /^[a-zA-Z0-9]{5,10}$/; // Allows 5 to 10 alphanumeric characters
+            let isValid = true;
+
+            // Clear previous error messages
+            document.getElementById('employee_id_error').innerText = '';
+            document.getElementById('password_error').innerText = '';
+
+            // Validate Employee ID (5 to 10 alphanumeric characters)
+            if (!employeeIdPattern.test(employee_id.value)) {
+                document.getElementById('employee_id_error').innerText = 'Please enter a valid Employee ID (5 to 10 characters).';
+                isValid = false;
+            }
+
+            // Basic Password validation
+            if (password.value === '') {
+                document.getElementById('password_error').innerText = 'Please enter your password.';
+                isValid = false;
+            }
+
+            // If validation passes, submit the form
+            if (isValid) {
+                document.querySelector('form').submit();
+            }
+        }
+    </script>
+</body>
+</html>
+Login.php
+<?php
+// Start session to track login state
+session_start();
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "toyota";
+
+// Create a new database connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check if the connection is successful
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the employee ID and password from the form, sanitize input
+    $employee_id = $conn->real_escape_string($_POST['employee_id']);
+    $password = $_POST['password'];
+
+    // Prepare the SQL statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM users WHERE employee_id = ?");
+    $stmt->bind_param("s", $employee_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // If the employee ID exists in the database
+    if ($result->num_rows > 0) {
+        // Fetch the user's data
+        $user = $result->fetch_assoc();
+
+        // Verify the entered password with the hashed password from the database
+        if (password_verify($password, $user['password'])) {
+            // If the password is correct, regenerate session ID for security
+            session_regenerate_id(true);
+            $_SESSION['employee_id'] = $employee_id;
+
+            // Redirect to the dashboard page
+            header("Location: dashboard.html");
+            exit();
+        } else {
+            // Redirect back to the login page with an error message
+            header("Location: login.html?error=invalid_password");
+            exit();
+        }
+    } else {
+        // Redirect back to the login page with an error message
+        header("Location: login.html?error=employee_id_not_found");
+        exit();
+    }
+
+    // Close the statement
+    $stmt->close();
+}
+
+// Close the database connection
+$conn->close();
+?>
+Signup.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link to MDB CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
+    <!-- Link to Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="signup.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="text-center">
+        <div class="p-5 bg-image" style="background-image: url('blue.jpg'); height: 200px;"></div>
+        <div class="card mx-4 mx-md-5 shadow-5-strong bg-body-tertiary">
+            <div class="card-body py-5 px-md-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-10">
+                        <h2 class="mb-5">Signup Form</h2>
+                        <form id="registration-form" action="signup.php" method="post" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="name"><i class="fas fa-user"></i> Full name</label>
+                                        <input type="text" id="name" name="name" class="form-control" required />
+                                        <div id="nameError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="employee_id"><i class="fas fa-id-badge"></i> Employee ID</label>
+                                        <input type="text" id="employee_id" name="employee_id" class="form-control" required />
+                                        <div id="employeeIdError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="designation"><i class="fas fa-briefcase"></i> Designation</label>
+                                        <input type="text" id="designation" name="designation" class="form-control" required />
+                                        <div id="designationError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="departmentdivision"><i class="fas fa-building"></i> Department/Division</label>
+                                        <input type="text" id="departmentdivision" name="departmentdivision" class="form-control" required />
+                                        <div id="departmentDivisionError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="password"><i class="fas fa-lock"></i> Enter Your Domain Password</label>
+                                        <input type="password" id="password" name="password" class="form-control" required />
+                                        <div id="passwordError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="email"><i class="fas fa-envelope"></i> Email</label>
+                                        <input type="email" id="email" name="email" class="form-control" required />
+                                        <div id="emailError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="costcenterno"><i class="fas fa-dollar-sign"></i> Cost Center No</label>
+                                        <input type="text" id="costcenterno" name="costcenterno" class="form-control" required />
+                                        <div id="costCenterNoError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="contactnumber"><i class="fas fa-phone"></i> Contact Number</label>
+                                        <input type="text" id="contactnumber" name="contactnumber" class="form-control" required />
+                                        <div id="contactNumberError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" style="display: flex; justify-content: center;"> <!-- Flexbox for centering -->
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/jpeg, image/png, image/jpg" onchange="displayFileName()" required />
+                                        <div id="profilePhotoError" class="error" style="display: none;"></div>
+                                    </div>
+                                    <!-- Custom Upload Box -->
+                                    <div class="upload-box">
+                                        <label for="profilePhoto" class="custom-file-upload">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p> * Drag and drop or click to upload your profile photo</p>
+                                        </label>
+                                    </div>
+                                    <span id="fileName" style="display: block; margin-top: 8px; color: #555;"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center" style="margin-top: -18px;"> <!-- Reduced margin-top to move it up -->
+                                <button type="submit" class="btn btn-primary custom-button">Sign Up</button>
+                            </div>
+                            
+                        </form>
+                        <p>Already have an account? <a href="#" onclick="window.location.href='login.html';">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    <!-- Section: Design Block -->
+    <!-- Link to Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Link to MDB JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    <!-- Custom JavaScript for additional validation -->
+    <script src="signup.js"></script>
+
+    <!-- Custom JavaScript -->
+    
+</body>
+</html>
+Signup.js
+// Utility function to show error
+function showError(element, message) {
+    element.textContent = message;
+    element.style.display = 'block';
+}
+
+// Utility function to hide error
+function hideError(element) {
+    element.style.display = 'none';
+}
+
+// Validate field with length constraints
+function validateField(field, errorField, minLength, maxLength, fieldName) {
+    const value = field.value.trim();
+    if (value.length === 0) {
+        showError(errorField, `${fieldName} cannot be empty.`);
+        return false;
+    } else if (value.length < minLength || value.length > maxLength) {
+        showError(errorField, `${fieldName} must be between ${minLength} and ${maxLength} characters.`);
+        return false;
+    }
+    hideError(errorField);
+    return true;
+}
+
+// Validate contact number specifically
+function validateContactNumber() {
+    const contactNumberField = document.getElementById('contactnumber');
+    const contactNumberError = document.getElementById('contactNumberError');
+    const value = contactNumberField.value.trim();
+    const phoneRegex = /^\d{10}$/;
+    
+    if (value.length === 0) {
+        showError(contactNumberError, 'Contact Number cannot be empty.');
+        return false;
+    } else if (!phoneRegex.test(value)) {
+        showError(contactNumberError, 'Contact Number must be 10 digits.');
+        return false;
+    }
+    hideError(contactNumberError);
+    return true;
+}
+
+// Validate email format
+function validateEmail() {
+    const emailField = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const value = emailField.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (value.length === 0) {
+        showError(emailError, 'Email cannot be empty.');
+        return false;
+    } else if (!emailRegex.test(value)) {
+        showError(emailError, 'Please enter a valid email address.');
+        return false;
+    }
+    hideError(emailError);
+    return true;
+}
+
+// Validate password strength
+function validatePassword() {
+    const passwordField = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+    const value = passwordField.value.trim();
+    
+    // Regex for at least 6 characters, including uppercase, lowercase, number, and special character
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/;
+
+    if (value.length === 0) {
+        showError(passwordError, 'Password cannot be empty.');
+        return false;
+    } else if (!passwordRegex.test(value)) {
+        showError(passwordError, 'Password must be 6-20 characters long and include uppercase, lowercase, number, and special character.');
+        return false;
+    }
+    hideError(passwordError);
+    return true;
+}
+
+// Validate the form before submission
+function validateForm() {
+    let valid = true;
+
+    // Validate each field
+    valid &= validateField(document.getElementById('name'), document.getElementById('nameError'), 1, 50, 'Full Name');
+    valid &= validateField(document.getElementById('employee_id'), document.getElementById('employeeIdError'), 1, 15, 'Employee ID');
+    valid &= validateField(document.getElementById('designation'), document.getElementById('designationError'), 1, 50, 'Designation');
+    valid &= validateField(document.getElementById('departmentdivision'), document.getElementById('departmentDivisionError'), 1, 50, 'Department/Division');
+    valid &= validatePassword(); // Validate password
+    valid &= validateField(document.getElementById('costcenterno'), document.getElementById('costCenterNoError'), 1, 15, 'Cost Center No');
+    valid &= validateEmail(); // Validate email separately
+    valid &= validateContactNumber();
+
+    return valid;
+}
+
+// Display file name only when a file is selected
+function displayFileName() {
+    const fileInput = document.getElementById('profilePhoto');
+    const fileName = document.getElementById('fileName');
+    
+    fileName.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+}
+
+// Form submission handling
+document.getElementById('registration-form').addEventListener('submit', function(event) {
+    if (!validateForm()) {
+        event.preventDefault(); // Prevent form submission if validation fails
+    } else {
+        // Show success message and redirect
+        alert("Signup Successful!"); // Replace with UI notification if desired
+        window.location.href = 'login.html'; // Redirect to login page
+    }
+});
+
+// Event listener for file input change
+document.getElementById('profilePhoto').addEventListener('change', displayFileName);
+Signup.php
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "toyota";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Function to validate input
+function validate_input($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get and validate user inputs
+    $employee_id = validate_input($_POST['employee_id']);
+    $password = validate_input($_POST['password']);
+    $name = validate_input($_POST['name']);
+    $designation = validate_input($_POST['designation']);
+    $departmentdivision = validate_input($_POST['departmentdivision']);
+    $costcenterno = validate_input($_POST['costcenterno']);
+    $email = validate_input($_POST['email']);
+    $contactnumber = validate_input($_POST['contactnumber']);
+
+    // Ensure required fields are not empty
+    if (empty($employee_id) || empty($password) || empty($email) || empty($contactnumber)) {
+        die("Employee ID, password, email, and contact number are required.");
+    }
+
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email format.");
+    }
+
+    // Validate contact number (ensure it's numeric and 10 digits)
+    if (!preg_match('/^\d{10}$/', $contactnumber)) {
+        die("Contact Number must be 10 digits.");	
+    }
+
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    // Initialize profilePhoto variable
+    $profilePhoto = "uploads/default-photo.png"; // Default photo if no file is uploaded
+
+    // Check if the file was uploaded without errors
+    if (isset($_FILES['profilePhoto']) && $_FILES['profilePhoto']['error'] === UPLOAD_ERR_OK) {
+        $profilePhotoFile = $_FILES['profilePhoto'];
+
+        // Validate the file (you can customize the validations based on your needs)
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Allowed MIME types
+        $fileType = mime_content_type($profilePhotoFile['tmp_name']);
+
+        // Validate file size (e.g., max 2MB)
+        if ($profilePhotoFile['size'] > 2 * 1024 * 1024) {
+            die("File size must be less than 2MB.");
+        }
+
+        if (in_array($fileType, $allowedTypes)) {
+            // Sanitize the file name and move it to your desired directory
+            $fileName = uniqid() . "_" . basename($profilePhotoFile['name']); // Unique file name
+            $targetDir = "uploads/"; // Ensure this directory exists
+            $targetFilePath = $targetDir . $fileName;
+
+            if (move_uploaded_file($profilePhotoFile['tmp_name'], $targetFilePath)) {
+                $profilePhoto = $targetFilePath; // Store the path to the file
+            } else {
+                die("Sorry, there was an error uploading your file.");
+            }
+        } else {
+            die("Invalid file type. Please upload an image (JPEG, PNG, GIF).");
+        }
+    } else {
+        echo "Using default photo.";
+    }
+
+    // First prepared statement for the users table
+    $stmt = $conn->prepare("INSERT INTO users (employee_id, password, name, designation, departmentdivision, costcenterno, email, contactnumber, profilePhoto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssss", $employee_id, $hashed_password, $name, $designation, $departmentdivision, $costcenterno, $email, $contactnumber, $profilePhoto);
+
+    // Execute the statement for the users table
+    if ($stmt->execute()) {
+        // Prepare the second statement for the guest_coupon_requests table
+        $stmt2 = $conn->prepare("INSERT INTO guest_coupon_requests (employee_id, departmentdivision) VALUES (?, ?)");
+        $stmt2->bind_param("ss", $employee_id, $departmentdivision);
+
+        // Execute the statement for the guest_coupon_requests table
+        if ($stmt2->execute()) {
+            // Redirect to login page after successful signup
+            header("Location: login.html");
+            exit; // Ensure no further code is executed
+        } else {
+            echo "Error inserting into guest_coupon_requests: " . $stmt2->error;
+        }
+
+        // Close the second statement
+        $stmt2->close();
+    } else {
+        echo "Error inserting into users: " . $stmt->error;
+    }
+
+    // Close the first statement
+    $stmt->close();
+}
+
+// Close the database connection
+$conn->close();
+?>
+Dashboard.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="dashboard.css"> <!-- Link to your external CSS file -->
+    
+</head>
+<body>
+    <!-- Place these scripts  body tag -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="toyoto_logo 2.png" alt="Logo" class="logo" />
+            <span class="logo-text">Guest Coupon</span> <!-- Add the text here -->
+        </div>      
+        <div class="navbar-profile">
+            <img src="default-profile.png" alt="Profile Photo" id="profilePhoto" class="profile-photo" />          
+            <span id="name"></span> <!-- Placeholder for the name -->
+        </div>
+    </div>
+   
+     <!-- Sidebar -->
+     <div class="sidebar">
+        <a href="#" id="submitRequestLink"><i class="fas fa-paper-plane"></i> Submit Request</a>
+        <a href="#" id="approvalStatusLink"><i class="fas fa-tasks"></i> Approval Status</a>
+        <a href="#" id="approveRequestsLink"><i class="fas fa-check-square"></i> Approve Requests</a>
+        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </div>
+
+ <!-- New Status Section -->
+<div class="status-section" id="statusSection">
+    <h2 class="status-heading">Approval Status <i class="fas fa-check-circle" style="color: green; margin-left: 8px; font-size: 26px"></i></h2>
+    <p id="status"></p>
+    
+    <div id="statusContent">
+        <div class="status-labels">
+            <!-- Each label can be placed within a container for better spacing -->
+            <div class="status-row">
+                <label for="date">Date</label>
+                <p class="date">10-10-2024</p> <!-- Changed id to class -->
+            </div>
+            <div class="status-row">
+                <label for="request_id">Request ID</label>
+                <p class="request_id">607526</p> <!-- Changed id to class -->
+            </div>
+            <div class="status-row">
+                <label for="canteenType">Canteen Type</label>
+                <p class="canteenType">P2-DH6-Fortuner</p> <!-- Changed id to class -->
+            </div>
+            <div class="status-row">
+                <label for="serviceType">Service Type</label>
+                <p class="serviceType">Breakfast</p> <!-- Changed id to class -->
+            </div>
+            <div class="status-row">
+                <label for="guest_name">Number of Guests</label>
+                <p class="guest_name">10</p> <!-- Changed id to class -->
+            </div>
+            <div class="status-row">
+                <label for="employee_id">Approved By</label>
+                <p class="employee_id">B G Mahesh</p> <!-- Changed id to class -->
+            </div>
+        </div>
+    </div>
+</div>
+   
+    <div class="request-container">
+        <h2 class="approve-heading">Approve Pending Requests</h2> <!-- Add this line -->
+        <div class="request-row header">
+            <div>Date</div>
+            <div>Request ID</div>
+            <div>Employee ID</div>
+            <div>Dep/Div</div>
+            <div>Guest Name</div>
+            <div>Company</div>
+            <div>Service Type</div>
+            <div>Action</div>
+        </div>
+        <div id="request-rows">
+            <!-- Dynamically generated rows will be inserted here -->
+        </div>
+    <div class="note-section" id="noteSection">
+        <h3>NOTE:</h3>
+        <ol>
+            <li>Guest is the one who has come to TKM occasionally for business on the invitation of TKM.</li>
+            <li>Team member should accompany the Guest.</li>
+            <li>Division Head/Department Head Signature is Mandatory.</li>
+            <li>Before approaching the Dining Hall Counters, ensure TM has to take approval from Canteen by sending mail to TKM.ERD. If any clarification-Please Contact 2809/2810.</li>
+            <li>Submit Hard Copy of Duly Signed by User Requester & Division Head to Canteen Staff at Dining Hall to be displayed.</li>
+        </ol>
+    </div>
+    
+<!-- This is the content section that should be shown only when Submit Request is clicked -->
+<div id="requestFormContent" class="content" style="display: none;">
+    <form id="coupon-form" action="submit_request.php" method="post">
+    <h2 style="margin-bottom: 20px; color: #4c4ace;">Update the guest details below and take user approval (Manager and Above)</h2>  
+    <div class="details" style="margin-top: 50px;">
+        <div class="details-left">
+            <div class="info-item">
+                <label for="employee_id">Employee ID</label>
+                <p id="employee_id"></p>
+            </div>
+        
+            <div class="info-item">
+                <label for="designation">Designation</label>
+                <p id="designation"></p>
+            </div>
+            
+            <div class="info-item">
+                <label for="departmentDivision">Department</label>
+                <p id="departmentDivision"></p>
+            </div>
+        </div>
+
+        <div class="details-right">
+            <div class="info-item">
+                <label for="costCenterNo">CostCenterNo</label>
+                <p id="costCenterNo"></p>
+            </div>
+            
+            <div class="info-item">
+                <label for="email">Email</label>
+                <p id="email"></p>
+            </div>
+        </div>
+    </div>   
+            <div class="date-picker-row">
+                <!-- Date Picker -->
+                <div class="date-picker">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date">
+                </div>     
+                <!-- Select Service Type -->
+                <div class="dropdown">
+                    <i class="fas fa-utensils dropdown-icon"></i> <!-- Icon outside the box -->
+                    <select id="serviceType" name="serviceType" class="dropdown-select">
+                        <option value="" disabled selected>Select service type</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                    </select>
+                </div>
+
+                <!-- Select Canteen -->
+                <div class="dropdown">
+                    <i class="fas fa-store dropdown-icon"></i> <!-- Icon outside the box -->
+                    <select id="canteenType" name="canteenType" class="dropdown-select">
+                        <option value="" disabled selected>Select Canteen</option>
+                        <option value="P1-DH1-Qualis">P1-DH1-Qualis</option>
+                        <option value="P1-DH2-Innova">P1-DH2-Innova</option>
+                        <option value="P1-DH3-NPC Camry">P1-DH3-NPC Camry</option>
+                        <option value="P2-DH4-Corola">P2-DH4-Corola</option>
+                        <option value="P2-DH5-Etios">P2-DH5-Etios</option>
+                        <option value="P2-DH6-Fortuner">P2-DH6-Fortuner</option>
+                        <option value="P2-JMB-1-Yaris">P2-JMB-1-Yaris</option>
+                        <option value="P2-JMB-2-Hilux">P2-JMB-2-Hilux</option>
+                        <option value="P2-JMB-3-Hyryder">P2-JMB-3-Hyryder</option>
+                    </select>
+                </div>
+            </div>
+            <!-- New Table Section for Guest Details -->
+            <div class="table-container">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #9f9c9ce0; padding: 10px; background-color: #ecebf9;">Sl.No</th>
+                            <th style="border: 1px solid #aca8a8; padding: 10px; background-color: #ecebf9;">Guest Name</th>
+                            <th style="border: 1px solid #aca8a8; padding: 10px; background-color: #ecebf9;">Company/Place</th>
+                            <th style="border: 1px solid #aca8a8; padding: 10px; background-color: #ecebf9;">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guest-rows">
+                        <tr>
+                            <td class="serial-number" style="border: 1px solid #ccc; padding: 10px;">1</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">
+                                <input type="text" name="guest_name[]" placeholder="Enter Guest name" style="width: 100%; padding: 5px; border: none; text-align: center;" required>
+                            </td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">
+                                <input type="text" name="company_place[]" placeholder="Enter Company Name" style="width: 100%; padding: 5px; border: none; text-align: center;" required>
+                            </td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">
+                                <input type="email" name="email[]" placeholder="Enter Email of Guest" style="width: 100%; padding: 5px; border: none; text-align: center;" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="add-entry-container" style="margin-top: 30px; text-align: center;">
+                    <a href="#" onclick="addNewEntry()" style="text-decoration: none; color: #4c4ace; font-size: 16px;">
+                        Add New Entry
+                    </a>
+                </div>
+
+                <div class="submit-container" style="text-align: center; margin-top: 12px;">
+                    <button type="submit" class="submit-button" style="padding: 9px 10px; background-color: #857ff6; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 13px;">
+                        Submit
+                    </button>
+                </div>
+
+        <div id="notification" style="display: none;">
+            <!-- Your notification message -->
+        </div>
+    </form>
+</div>
+    <script>
+       $(document).ready(function() {
+    // Show the note section and hide request container by default when the page loads
+    $('#noteSection').show(); // Ensure the notes section is visible on login
+    $('.request-container').hide(); // Hide the request container by default
+    $('#requestFormContent').hide(); // Hide the request form content by default
+
+    // Handle the Submit Request link click
+    $('#submitRequestLink').click(function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        $('#noteSection').hide(); // Hide the note section
+        $('.request-container').hide(); // Hide the request container
+        $('#requestFormContent').show(); // Show the request form content
+    });
+
+    // Handle the Approve Requests link click
+    $('#approveRequestsLink').click(function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        $('#noteSection').hide(); // Hide the note section
+        $('#requestFormContent').hide(); // Hide the request form content
+        $('.request-container').show(); // Show the request container
+    });
+});
+    </script>    
+<script>
+    $(document).ready(function() {
+        // Handle form submission
+        $('#coupon-form').on('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            $.ajax({
+                type: 'POST',
+                url: 'submit_request.php', // URL to your server-side script
+                data: $(this).serialize(), // Serialize form data
+                dataType: 'json', // Expect a JSON response
+                success: function(response) {
+                    // Assuming the response contains the request ID
+                    if (response.request_id) {
+                        alert('You have successfully submitted your guest coupon request with Request ID: ' + response.request_id);
+                    } else {
+                        alert('Submission successful, but no Request ID was returned.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error); // Display an error message
+                }
+            });
+        });
+    });
+    </script>
+   <script>
+    document.getElementById("submitRequestLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default anchor link behavior
+        // Hide the notes section
+        var noteSection = document.getElementById("noteSection");
+        noteSection.style.display = "none"; // Hides the notes section
+    });
+</script>
+
+<script src="dashboard.js"></script> <!-- Ensure path is correct -->
+<script src="anotherScriptdashboard.js"></script> <!-- Ensure path is correct -->
+<script src="requests.js"></script>
+<script>
+// Fetch status details dynamically
+$.ajax({
+        url: "fetch_status.php", // Ensure this path is correct relative to your HTML file
+        method: "GET",
+        dataType: "json", // Expect JSON response
+        success: function(data) {
+            // Assuming 'data' is an object, not an array
+            $(".date").text(data.date); 
+            $(".request_id").text(data.request_id); 
+            $(".canteenType").text(data.canteenType); 
+            $(".serviceType").text(data.serviceType); 
+            $(".guest_name").text(data.guest_name); 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching data: " + textStatus, errorThrown);
+        }
+</script>
+</body>
+</html>
+Dashboard.php
+<?php
+session_start(); // Start or continue the session
+
+// Check if employee ID is stored in the session (i.e., if the user is logged in)
+if (!isset($_SESSION['employee_id'])) {
+    // If not logged in, redirect to login page
+    header("Location: login.html");
+    exit();
+}
+
+// Database connection details
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "toyota"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    error_log("Database connection failed: " . $conn->connect_error); // Log the error
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get the logged-in user's employee ID
+$employee_id = $_SESSION['employee_id'];
+
+// Prepare the SQL query to fetch user details
+$sql = "SELECT employee_id, profilePhoto, name, designation, departmentDivision, costCenterNo, email FROM users WHERE employee_id = ?";
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    error_log("SQL preparation failed: " . $conn->error); // Log the error
+    die("SQL preparation failed: " . $conn->error);
+}
+
+// Bind the parameter and execute the statement
+$stmt->bind_param("s", $employee_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Default values
+$profilePhoto = "default-profile.png"; // Default image
+$name = "Guest"; // Default name
+$designation = "Not specified"; // Default designation
+$departmentDivision = "Not specified"; // Default department division
+$costCenterNo = "Not specified"; // Default cost center number
+$email = "Not specified"; // Default email
+
+// Check if any rows were returned
+if ($row = $result->fetch_assoc()) {
+    // Fetch user details
+    $profilePhoto = !empty($row['profilePhoto']) ? $row['profilePhoto'] : $profilePhoto;
+    $name = !empty($row['name']) ? $row['name'] : $name;
+    $designation = !empty($row['designation']) ? $row['designation'] : $designation;
+    $departmentDivision = !empty($row['departmentDivision']) ? $row['departmentDivision'] : $departmentDivision;
+    
+    $costCenterNo = !empty($row['costCenterNo']) ? $row['costCenterNo'] : $costCenterNo;
+    $email = !empty($row['email']) ? $row['email'] : $email;
+    $employee_id = $row['employee_id']; // Update the employee ID
+} else {
+    error_log("No user found with employee ID: " . $employee_id); // Log if no user found
+}
+
+// Clean up
+$stmt->close();
+$conn->close();
+
+// Prepare response data
+$response = array(
+    "profilePhoto" => $profilePhoto,
+    "name" => $name,
+    "designation" => $designation,
+    "departmentDivision" => $departmentDivision,
+   
+    "costCenterNo" => $costCenterNo,
+    "email" => $email,
+    "employee_id" => $employee_id // Include employee ID in the JSON response
+);
+
+// Set content type to application/json
+header('Content-Type: application/json');
+
+// Log the response for debugging
+error_log("Dashboard response: " . json_encode($response));
+
+// Output the JSON response
+echo json_encode($response);
+?>
+Request.js
+// Function to fetch pending requests and populate the request rows
+function fetchPendingRequests() {
+    fetch('fetch_pending_requests.php') // Ensure this path is correct
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const requestRows = document.getElementById('request-rows');
+            requestRows.innerHTML = ''; // Clear existing rows
+
+            data.forEach(request => {
+                const newRow = document.createElement('div');
+                newRow.className = 'request-row';
+                newRow.innerHTML = 
+                    <div>${request.date}</div>
+                    <div>${request.request_id}</div>
+                    <div>${request.employee_id}</div>
+                    <div>${request.departmentdivision}</div>
+                    <div>${request.guest_name} (${request.count})</div> <!-- Display guest name with count -->
+                    <div>${request.company_place}</div>
+                    <div>${request.serviceType}</div>
+                    <div class="action-links">
+                        <a href="#" class="approve-link" onclick="approveRequest('${request.request_id}'); return false;">Approve</a>
+                        <a href="#" class="reject-link" onclick="rejectRequest('${request.request_id}'); return false;">Reject</a>
+                    </div>
+                ;
+                requestRows.appendChild(newRow);
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+// Function to approve a request
+function approveRequest(requestId) {
+    // Send a request to the server to approve the request
+    fetch('approve_request.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ request_id: requestId, action: 'approve' })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log(Approved request ID: ${requestId});
+            fetchPendingRequests(); // Refresh the list after approval
+        } else {
+            console.error('Error approving request:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the approve operation:', error);
+    });
+}
+
+// Function to reject a request
+function rejectRequest(requestId) {
+    // Send a request to the server to reject the request
+    fetch('approve_request.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ request_id: requestId, action: 'reject' })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log(Rejected request ID: ${requestId});
+            fetchPendingRequests(); // Refresh the list after rejection
+        } else {
+            console.error('Error rejecting request:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the reject operation:', error);
+    });
+}
+
+// Call the function to fetch pending requests when the page loads
+document.addEventListener('DOMContentLoaded', fetchPendingRequests);
+
+Approve_requets.php
+<?php
+// Database connection parameters
+$host = 'localhost';
+$db = 'toyota';
+$user = 'root';
+$pass = '';
+
+// Create a new database connection
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Check the connection
+if ($conn->connect_error) {
+    echo json_encode(["success" => false, "error" => "Database connection failed: " . $conn->connect_error]);
+    exit;
+}
+
+// Get the JSON input
+$data = json_decode(file_get_contents("php://input"), true);
+
+// Check if the required data is present
+if (isset($data['request_id']) && isset($data['action'])) {
+    $request_id = $data['request_id'];
+    $action = $data['action'];
+
+    // Prepare the SQL query based on the action
+    if ($action === 'approve') {
+        $stmt = $conn->prepare("UPDATE guest_coupon_requests SET status='approved' WHERE request_id=?");
+    } elseif ($action === 'reject') {
+        $stmt = $conn->prepare("UPDATE guest_coupon_requests SET status='rejected' WHERE request_id=?");
+    } else {
+        echo json_encode(["success" => false, "error" => "Invalid action."]);
+        exit;
+    }
+
+    // Bind parameters and execute
+    $stmt->bind_param("s", $request_id);
+
+    // Execute the query and return the response
+    if ($stmt->execute() === TRUE) {
+        echo json_encode(["success" => true, "updated_status" => $action === 'approve' ? 'approved' : 'rejected']);
+    } else {
+        echo json_encode(["success" => false, "error" => $stmt->error]);
+    }
+
+    // Close the statement
+    $stmt->close();
+} else {
+    echo json_encode(["success" => false, "error" => "Invalid input."]);
+}
+
+// Close the database connection
+$conn->close();
+?>
+Fetch_pending_requests.php
+<?php
+// Database connection parameters
+$host = 'localhost'; // Change if your database host is different
+$db = 'toyota'; // Your database name
+$user = 'root'; // Your database username
+$pass = ''; // Your database password (if applicable)
+
+// Create a new database connection
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch pending requests with additional details using JOIN
+$sql = "SELECT 
+            g.request_id, 
+            g.date, 
+            g.employee_id, 
+            u.departmentdivision, 
+            g.guest_name, 
+            g.company_place, 
+            g.serviceType,
+            COUNT(g.guest_name) AS count  -- Count the number of guests
+        FROM 
+            guest_coupon_requests g 
+        JOIN 
+            users u ON g.employee_id = u.employee_id 
+        WHERE 
+            g.status = 'pending'
+        GROUP BY 
+            g.request_id, g.employee_id";  // Group by request_id and employee_id
+
+$result = $conn->query($sql);
+
+// Initialize an array to hold the requests
+$requests = [];
+
+// Check if there are results and fetch them into the array
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $requests[] = $row; // Add each request to the array
+    }
+}
+
+// Return the results as a JSON response
+header('Content-Type: application/json');
+echo json_encode($requests);
+
+// Close the database connection
+$conn->close();
+?>
+
+
+
+
+Fetch_status.php
+<?php
+// fetch_status.php
+$servername = "localhost"; // Your database server
+$username = "root"; // Your database username
+$password = ""; // Your database password
+$dbname = "toyota"; // Your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die(json_encode(["success" => false, "error" => "Connection failed: " . $conn->connect_error]));
+}
+
+// Prepare SQL query to fetch status details
+$sql = "SELECT date, request_id, canteenType, serviceType, guest_name FROM guest_coupon_requests WHERE status = 'approved'";
+$result = $conn->query($sql);
+
+$statusData = [];
+if ($result) {
+    if ($result->num_rows > 0) {
+        // Fetch the data
+        while ($row = $result->fetch_assoc()) {
+            $statusData[] = $row;
+        }
+    }
+    // Return JSON response
+    header('Content-Type: application/json');
+    echo json_encode(["success" => true, "data" => $statusData]);
+} else {
+    // Handle query error
+    echo json_encode(["success" => false, "error" => $conn->error]);
+}
+
+$conn->close();
+?>
+Submit_request.php
+<?php
+session_start(); // Start the session
+
+// Database configuration
+$servername = "localhost";
+$username = "root"; // Your MySQL username
+$password = ""; // Your MySQL password
+$dbname = "toyota"; // Change to your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die(json_encode(["success" => false, "error" => "Connection failed: " . $conn->connect_error]));
+}
+
+// Assuming the employee_id is stored in session
+$employee_id = $_SESSION['employee_id'] ?? null; // Adjust as per how you store employee_id in session
+
+// Check if employee_id was fetched from session
+if (!$employee_id) {
+    die(json_encode(["success" => false, "error" => "Error: Employee ID not found in session."]));
+}
+
+// Function to generate a unique numeric request ID
+function generateRequestId($length = 6) {
+    return str_pad(rand(0, 999999), $length, '0', STR_PAD_LEFT); // Unique numeric ID
+}
+
+// Retrieve form data
+$date = $_POST['date'] ?? '';
+$serviceType = $_POST['serviceType'] ?? '';
+$canteenType = $_POST['canteenType'] ?? '';
+$guest_names = $_POST['guest_name'] ?? []; // Array of guest names
+$company_places = $_POST['company_place'] ?? []; // Array of company names
+$emails = $_POST['email'] ?? []; // Array of emails
+
+// Initialize response array
+$response = ["success" => false];
+
+// Ensure all arrays have the same length
+if (count($guest_names) === count($company_places) && count($guest_names) === count($emails)) {
+    // Generate a single request ID to be used for all rows
+    $request_id = generateRequestId();
+
+    // Prepare the SQL statement to include employee_id
+    $stmt = $conn->prepare("INSERT INTO guest_coupon_requests (request_id, date, serviceType, canteenType, guest_name, company_place, email, employee_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+    // Loop through each row of guest data and insert it into the database
+    $insertedCount = 0; // Track successful inserts
+    for ($i = 0; $i < count($guest_names); $i++) {
+        $guest_name = $guest_names[$i];
+        $company_place = $company_places[$i];
+        $email = $emails[$i];
+
+        // Optional: Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $response['errors'][] = "Invalid email format for guest $guest_name.";
+            continue; // Skip this iteration
+        }
+
+        // Bind the parameters for the current row, including employee_id
+        $stmt->bind_param("ssssssss", $request_id, $date, $serviceType, $canteenType, $guest_name, $company_place, $email, $employee_id);
+
+        // Execute the statement for each row
+        if ($stmt->execute()) {
+            $insertedCount++;
+        } else {
+            // Collect errors in response
+            $response['errors'][] = "Error inserting row for guest $guest_name: " . $stmt->error;
+        }
+    }
+
+    // On successful insertion, set success message and request ID
+    if ($insertedCount > 0) {
+        $response['success'] = true;
+        $response['request_id'] = $request_id;
+    } else {
+        $response['error'] = "Error: No records were inserted.";
+    }
+} else {
+    $response['error'] = "Error: Mismatched data. Please ensure all fields (guest name, company, email) are filled out for each guest.";
+}
+
+// Set the content type to application/json
+header('Content-Type: application/json');
+
+// Echo the JSON encoded response
+echo json_encode($response);
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+?>
+
+
+
+Logout.php
+<?php
+session_start(); // Start the session
+
+// Unset all session variables
+$_SESSION = [];
+
+// Destroy the session
+session_destroy();
+
+// Redirect to the login page with a message (optional)
+header("Location: login.html?logout=success"); // Redirect to login page with logout status
+exit();
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

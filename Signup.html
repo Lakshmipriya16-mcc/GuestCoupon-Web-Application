@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link to MDB CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
+    <!-- Link to Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="signup.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="text-center">
+        <div class="p-5 bg-image" style="background-image: url('blue.jpg'); height: 200px;"></div>
+        <div class="card mx-4 mx-md-5 shadow-5-strong bg-body-tertiary">
+            <div class="card-body py-5 px-md-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-10">
+                        <h2 class="mb-5">Signup Form</h2>
+                        <form id="registration-form" action="signup.php" method="post" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="name"><i class="fas fa-user"></i> Full name</label>
+                                        <input type="text" id="name" name="name" class="form-control" required />
+                                        <div id="nameError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="employee_id"><i class="fas fa-id-badge"></i> Employee ID</label>
+                                        <input type="text" id="employee_id" name="employee_id" class="form-control" required />
+                                        <div id="employeeIdError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="designation"><i class="fas fa-briefcase"></i> Designation</label>
+                                        <input type="text" id="designation" name="designation" class="form-control" required />
+                                        <div id="designationError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="departmentdivision"><i class="fas fa-building"></i> Department/Division</label>
+                                        <input type="text" id="departmentdivision" name="departmentdivision" class="form-control" required />
+                                        <div id="departmentDivisionError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="password"><i class="fas fa-lock"></i> Enter Your Domain Password</label>
+                                        <input type="password" id="password" name="password" class="form-control" required />
+                                        <div id="passwordError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="email"><i class="fas fa-envelope"></i> Email</label>
+                                        <input type="email" id="email" name="email" class="form-control" required />
+                                        <div id="emailError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="costcenterno"><i class="fas fa-dollar-sign"></i> Cost Center No</label>
+                                        <input type="text" id="costcenterno" name="costcenterno" class="form-control" required />
+                                        <div id="costCenterNoError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="contactnumber"><i class="fas fa-phone"></i> Contact Number</label>
+                                        <input type="text" id="contactnumber" name="contactnumber" class="form-control" required />
+                                        <div id="contactNumberError" class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" style="display: flex; justify-content: center;"> <!-- Flexbox for centering -->
+                                <div class="col-md-6 form-group">
+                                    <div class="form-outline">
+                                        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/jpeg, image/png, image/jpg" onchange="displayFileName()" required />
+                                        <div id="profilePhotoError" class="error" style="display: none;"></div>
+                                    </div>
+                                    <!-- Custom Upload Box -->
+                                    <div class="upload-box">
+                                        <label for="profilePhoto" class="custom-file-upload">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p> * Drag and drop or click to upload your profile photo</p>
+                                        </label>
+                                    </div>
+                                    <span id="fileName" style="display: block; margin-top: 8px; color: #555;"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center" style="margin-top: -18px;"> <!-- Reduced margin-top to move it up -->
+                                <button type="submit" class="btn btn-primary custom-button">Sign Up</button>
+                            </div>
+                            
+                        </form>
+                        <p>Already have an account? <a href="#" onclick="window.location.href='login.html';">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    <!-- Section: Design Block -->
+    <!-- Link to Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Link to MDB JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    <!-- Custom JavaScript for additional validation -->
+    <script src="signup.js"></script>
+
+    <!-- Custom JavaScript -->
+    
+</body>
+</html>
