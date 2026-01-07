@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- Icons & jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="navbar-logo">
+        <img src="images/toyoto_logo 2.png" class="logo">
+        <span class="logo-text">Guest Coupon</span>
+    </div>
+    <div class="navbar-profile">
+        <img src="images/default-profile.png" class="profile-photo">
+        <span id="name"></span>
+    </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <a href="#" id="submitRequestLink"><i class="fas fa-paper-plane"></i> Submit Request</a>
+    <a href="#" id="approveRequestsLink"><i class="fas fa-check-square"></i> Approve Requests</a>
+    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+</div>
+
+<!-- NOTE SECTION -->
+<div class="note-section" id="noteSection">
+    <h3>NOTE:</h3>
+    <ol>
+        <li>Guest must be accompanied by employee.</li>
+        <li>Division Head approval required.</li>
+        <li>Submit signed hard copy to canteen.</li>
+    </ol>
+</div>
+
+<!-- STATUS SECTION -->
+<div class="status-section">
+    <h2>Approval Status</h2>
+    <div class="status-row"><label>Date:</label> <p class="date"></p></div>
+    <div class="status-row"><label>Request ID:</label> <p class="request_id"></p></div>
+    <div class="status-row"><label>Canteen:</label> <p class="canteenType"></p></div>
+    <div class="status-row"><label>Service:</label> <p class="serviceType"></p></div>
+    <div class="status-row"><label>Guests:</label> <p class="guest_name"></p></div>
+</div>
+
+<!-- APPROVE REQUESTS -->
+<div class="request-container" style="display:none;">
+    <h2>Approve Pending Requests</h2>
+    <div id="request-rows"></div>
+</div>
+
+<!-- REQUEST FORM -->
+<div id="requestFormContent" style="display:none;">
+    <form id="coupon-form">
+        <h2>Submit Guest Coupon Request</h2>
+
+        <label>Date</label>
+        <input type="date" name="date" required>
+
+        <label>Service Type</label>
+        <select name="serviceType" required>
+            <option value="">Select</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+        </select>
+
+        <label>Canteen</label>
+        <select name="canteenType" required>
+            <option value="">Select</option>
+            <option>P2-DH6-Fortuner</option>
+            <option>P1-DH1-Qualis</option>
+        </select>
+
+        <table border="1" width="100%" style="margin-top:15px;">
+            <tr>
+                <th>Guest Name</th>
+                <th>Company</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="guest_name[]" required></td>
+                <td><input type="text" name="company_place[]" required></td>
+                <td><input type="email" name="email[]" required></td>
+            </tr>
+        </table>
+
+        <button type="submit" style="margin-top:15px;">Submit</button>
+    </form>
+</div>
+
+<!-- MAIN SCRIPT -->
+<script>
+$(document).ready(function () {
+
+    // Toggle sections
+    $("#submitRequestLink").click(function (e) {
+        e.preventDefault();
+        $("#noteSection, .request-container").hide();
+        $("#requestFormContent").show();
+    });
+
+    $("#approveRequestsLink").click(function (e) {
+        e.preventDefault();
+        $("#noteSection, #requestFormContent").hide();
+        $(".request-container").show();
+    });
+
+    // Submit form via AJAX
+    $("#coupon-form").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "submit_request.php",
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (res) {
+                alert("Request submitted! ID: " + res.request_id);
+            },
+            error: function () {
+                alert("Error submitting request");
+            }
+        });
+    });
+
+    // Fetch status
+    $.ajax({
+        url: "fetch_status.php",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            $(".date").text(data.date);
+            $(".request_id").text(data.request_id);
+            $(".canteenType").text(data.canteenType);
+            $(".serviceType").text(data.serviceType);
+            $(".guest_name").text(data.guest_name);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
