@@ -38,11 +38,5 @@ Testing
 
 Unit, Integration, System, Performance, Security, and GUI testing performed.
 
-Test cases are 
-<img width="940" height="509" alt="image" src="https://github.com/user-attachments/assets/46da7967-3a41-4cea-8852-6e255681ab8f" />
-<img width="940" height="660" alt="image" src="https://github.com/user-attachments/assets/427784f4-3e09-4ce2-8948-23a6a7fc1def" />
-<img width="940" height="629" alt="image" src="https://github.com/user-attachments/assets/71fd4388-d053-4bf5-9d35-1d94b9ad8fb2" />
-
-
 
 
