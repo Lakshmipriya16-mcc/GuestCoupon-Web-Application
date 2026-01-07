@@ -30,7 +30,8 @@ Configure config.php (or similar) with your database credentials.
 Access the application via:
 
 http://localhost/Guest-Coupon-Application/
-<img width="1694" height="765" alt="image" src="https://github.com/user-attachments/assets/3cd18117-b1b5-4d68-9981-02bc8fa6057a" />
+<img width="940" height="275" alt="image" src="https://github.com/user-attachments/assets/04d21d59-252b-4495-acac-9e60144effec" />
+
 
 <img width="940" height="381" alt="image" src="https://github.com/user-attachments/assets/8baca133-caad-4e20-8741-0d5c6fe4d6e6" />
 
